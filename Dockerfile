@@ -22,4 +22,4 @@ COPY docker-entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/docker-entrypoint.sh
 ENTRYPOINT ["docker-entrypoint.sh"]
 
-EXPOSE 3015
+EXPOSE 3020

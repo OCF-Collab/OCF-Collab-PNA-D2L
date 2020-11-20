@@ -12,8 +12,14 @@ class CompetencyFrameworkFetcher
   end
 
   def response
-    @response ||= Faraday.get(framework_url).tap do |response|
+    @response ||= connection.get(framework_url).tap do |response|
       raise NotFoundError unless response.success?
+    end
+  end
+
+  def connection
+    @connection ||= Faraday.new do |c|
+      c.response :follow_redirects
     end
   end
 

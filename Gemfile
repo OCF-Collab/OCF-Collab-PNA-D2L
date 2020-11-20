@@ -19,6 +19,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 # gem 'rack-cors'
 
 gem 'faraday', '1.1.0'
+gem 'faraday_middleware'
 gem 'jwt', '2.2.2'
 
 group :development, :test do

@@ -1,8 +1,8 @@
 version: '3'
 services:
-  ims-global-pna-web:
+  d2l-pna-web:
     build: .
-    command: bash -c "bundle install && rm -f tmp/pids/server.pid && bundle exec rails s -p 3015 -b '0.0.0.0'"
+    command: bash -c "bundle install && rm -f tmp/pids/server.pid && bundle exec rails s -p 3020 -b '0.0.0.0'"
     env_file:
       - .env.development
     volumes:
@@ -11,7 +11,7 @@ services:
     networks:
       - ocf_collab
     ports:
-      - 3015:3015
+      - 3020:3020
 
 networks:
   ocf_collab:

@@ -10,21 +10,26 @@ class OcfCollabJwtAuthenticator
   def token_data
     @token_data ||= JWT.decode(
       token,
-      public_key,
+      nil,
       true,
       {
+        jwks: jwks,
         iss: ISSUER,
         algorithm: header["alg"],
         verify_expiration: true,
         verify_iss: true,
-      }
+      },
     )[0]
   end
 
   private
 
-  def public_key
-    @public_key ||= OpenSSL::PKey::RSA.new(ENV["JWT_PUBLIC_KEY"])
+  def jwks
+    @jwks ||= JSON.parse(jwks_response).deep_symbolize_keys
+  end
+
+  def jwks_response
+    @jwks_keys_response ||= Faraday.get(URI.parse(ENV["JWKS_URL"])).body
   end
 
   def header

@@ -1,5 +1,5 @@
 class OcfCollabJwtAuthenticator
-  ISSUER = "OCF Collab"
+  ISSUER = "https://ocf-collab.org"
 
   attr_reader :token
 
@@ -15,7 +15,7 @@ class OcfCollabJwtAuthenticator
       {
         jwks: jwks,
         iss: ISSUER,
-        algorithm: header["alg"],
+        algorithm: "RS256",
         verify_expiration: true,
         verify_iss: true,
       },
@@ -29,7 +29,7 @@ class OcfCollabJwtAuthenticator
   end
 
   def jwks_response
-    @jwks_keys_response ||= Faraday.get(URI.parse(ENV["JWKS_URL"])).body
+    @jwks_keys_response ||= Faraday.get(ENV["JWKS_URL"]).body
   end
 
   def header
